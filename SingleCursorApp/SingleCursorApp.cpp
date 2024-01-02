@@ -178,6 +178,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         DeleteNotificationIcon(hWnd);
         PostQuitMessage(0);
         break;
+
+    case WMAPP_NOTIFYCALLBACK:
+    {
+        WORD cmd = LOWORD(lParam);
+        if (cmd == WM_RBUTTONUP || cmd == WM_LBUTTONUP)
+        {
+            POINT pt;
+            GetCursorPos(&pt);
+
+            HMENU hMenu = LoadMenu(NULL, MAKEINTRESOURCE(IDR_POPUPMENU));
+            hMenu = GetSubMenu(hMenu, 0);
+
+            TrackPopupMenu(hMenu, TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_BOTTOMALIGN, pt.x, pt.y, 0, hWnd, NULL);
+        }
+        break;
+    }
+
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }

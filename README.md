@@ -8,5 +8,5 @@ This app detects only system "I-Beam" cursor. If a 3rd party app displays custom
 
 ## Known Issues
 1. Multiple instances of this app are not guarantteed to run correctly, but the app doesn't try to check that.
-2. UI is still under development, there's no "Run at system start" option. Also, there's no Exit button - use Task Manager :)
+2. UI is still under development, there's no "Run at system start" option.
 
