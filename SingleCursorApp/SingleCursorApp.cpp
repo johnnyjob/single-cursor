@@ -21,16 +21,13 @@ WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 UINT const WMAPP_NOTIFYCALLBACK = WM_APP + 1;
 
-// Use a guid to uniquely identify our icon
-class __declspec(uuid("D417B206-54CE-49F0-8ABE-B6EC236AFE0E")) AppTrayIcon;
-
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 BOOL                AddNotificationIcon(HWND hwnd);
-BOOL DeleteNotificationIcon();
+BOOL DeleteNotificationIcon(HWND hwnd);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -178,7 +175,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_DESTROY:
-        DeleteNotificationIcon();
+        DeleteNotificationIcon(hWnd);
         PostQuitMessage(0);
         break;
     default:
@@ -213,8 +210,9 @@ BOOL AddNotificationIcon(HWND hwnd)
     nid.hWnd = hwnd;
     // add the icon, setting the icon, tooltip, and callback message.
     // the icon will be identified with the GUID
-    nid.uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE | NIF_SHOWTIP | NIF_GUID;
-    nid.guidItem = __uuidof(AppTrayIcon);
+    nid.uFlags = NIF_ICON | NIF_TIP | NIF_MESSAGE | NIF_SHOWTIP;
+    nid.hWnd = hwnd;
+    nid.uID = IDI_APPICON;
     nid.uCallbackMessage = WMAPP_NOTIFYCALLBACK;
     LoadIconMetric(hInst, MAKEINTRESOURCE(IDI_APPICON), LIM_SMALL, &nid.hIcon);
     LoadString(hInst, IDS_APP_TITLE, nid.szTip, ARRAYSIZE(nid.szTip));
@@ -225,11 +223,11 @@ BOOL AddNotificationIcon(HWND hwnd)
     return Shell_NotifyIcon(NIM_SETVERSION, &nid);
 }
 
-BOOL DeleteNotificationIcon()
+BOOL DeleteNotificationIcon(HWND hwnd)
 {
     NOTIFYICONDATA nid = { sizeof(nid) };
-    nid.uFlags = NIF_GUID;
-    nid.guidItem = __uuidof(AppTrayIcon);
+    nid.hWnd = hwnd;
+    nid.uID = IDI_APPICON;
     return Shell_NotifyIcon(NIM_DELETE, &nid);
 }
 
