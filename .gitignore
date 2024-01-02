@@ -3,5 +3,7 @@
 ################################################################################
 
 /.vs
-/SingleCursorApp/x64/Debug
-/SingleCursorApp/SingleCursorApp.vcxproj.user
+/**/x64/Debug
+/**/x64/Release
+/**/*.vcxproj.user
+/**/*.aps
