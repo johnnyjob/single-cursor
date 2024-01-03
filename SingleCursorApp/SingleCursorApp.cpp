@@ -191,7 +191,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             hMenu = GetSubMenu(hMenu, 0);
 
             SetForegroundWindow(hWnd);
-            TrackPopupMenu(hMenu, TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_BOTTOMALIGN, pt.x, pt.y, 0, hWnd, NULL);
+            TrackPopupMenuEx(hMenu, TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_BOTTOMALIGN, pt.x, pt.y, hWnd, NULL);
             PostMessage(hWnd, WM_NULL, 0, 0);
         }
         break;
