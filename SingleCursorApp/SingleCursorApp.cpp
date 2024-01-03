@@ -192,6 +192,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             SetForegroundWindow(hWnd);
             TrackPopupMenu(hMenu, TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_BOTTOMALIGN, pt.x, pt.y, 0, hWnd, NULL);
+            PostMessage(hWnd, WM_NULL, 0, 0);
         }
         break;
     }
