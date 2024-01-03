@@ -231,7 +231,7 @@ BOOL AddNotificationIcon(HWND hwnd)
     nid.hWnd = hwnd;
     nid.uID = IDI_APPICON;
     nid.uCallbackMessage = WMAPP_NOTIFYCALLBACK;
-    LoadIconMetric(hInst, MAKEINTRESOURCE(IDI_APPICON), LIM_SMALL, &nid.hIcon);
+    LoadIconMetric(hInst, MAKEINTRESOURCE(IDI_APPICONDARK), LIM_SMALL, &nid.hIcon);
     LoadString(hInst, IDS_APP_TITLE, nid.szTip, ARRAYSIZE(nid.szTip));
     Shell_NotifyIcon(NIM_ADD, &nid);
 

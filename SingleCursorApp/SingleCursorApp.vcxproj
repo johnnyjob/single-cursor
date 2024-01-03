@@ -141,9 +141,12 @@
     <ResourceCompile Include="SingleCursorApp.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="app-dark.ico" />
     <Image Include="app.ico" />
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app-dark.svg" />
     <None Include="app.svg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
