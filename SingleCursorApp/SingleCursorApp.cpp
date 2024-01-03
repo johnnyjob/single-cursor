@@ -190,6 +190,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             HMENU hMenu = LoadMenu(NULL, MAKEINTRESOURCE(IDR_POPUPMENU));
             hMenu = GetSubMenu(hMenu, 0);
 
+            SetForegroundWindow(hWnd);
             TrackPopupMenu(hMenu, TPM_LEFTALIGN | TPM_LEFTBUTTON | TPM_BOTTOMALIGN, pt.x, pt.y, 0, hWnd, NULL);
         }
         break;
